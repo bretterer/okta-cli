@@ -14,8 +14,24 @@
 
 package main
 
-import "github.com/bretterer/okta-cli/cmd"
+import (
+	"github.com/bretterer/okta-cli/cmd"
+	"fmt"
+)
 
 func main() {
+	fmt.Println(`                                              `)
+	fmt.Println(`==============================================`)
+	fmt.Println(`                                              `)
+	fmt.Println(`  ______    __  ___ .___________.    ___      `)
+	fmt.Println(` /  __  \  |  |/  / |           |   /   \     `)
+	fmt.Println("|  |  |  | |  '  /  `---|  |----`  /  ^  \\    ")
+	fmt.Println(`|  |  |  | |    <       |  |      /  /_\  \   `)
+	fmt.Println("|  `--'  | |  .  \\      |  |     /  _____  \\  ")
+	fmt.Println(` \______/  |__|\__\     |__|    /__/     \__\ `)
+	fmt.Println(`                                              `)
+	fmt.Println(`==============================================`)
+	fmt.Println(`                                              `)
+
 	cmd.Execute()
 }
