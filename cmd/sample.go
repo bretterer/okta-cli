@@ -304,7 +304,7 @@ func createOktaApp() (string, string) {
 }
 
 func resetOktaApp(app_id string) (string, string) {
-	return "212qETQbVS219e4ERutd", "pGifgDofHhrLaGGJzWyIIWhCZuou0WpunlYMKmUB"
+	return "FAKE_CLIENT_ID", "FAKE_CLIENT_SECRET"
 }
 
 func groupIdForEveryoneGroup() string {
