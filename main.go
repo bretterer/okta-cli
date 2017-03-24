@@ -16,22 +16,20 @@ package main
 
 import (
 	"github.com/bretterer/okta-cli/cmd"
+
+	"github.com/fatih/color"
 	"fmt"
 )
 
 func main() {
-	fmt.Println(`                                              `)
-	fmt.Println(`==============================================`)
-	fmt.Println(`                                              `)
-	fmt.Println(`  ______    __  ___ .___________.    ___      `)
-	fmt.Println(` /  __  \  |  |/  / |           |   /   \     `)
-	fmt.Println("|  |  |  | |  '  /  `---|  |----`  /  ^  \\    ")
-	fmt.Println(`|  |  |  | |    <       |  |      /  /_\  \   `)
-	fmt.Println("|  `--'  | |  .  \\      |  |     /  _____  \\  ")
-	fmt.Println(` \______/  |__|\__\     |__|    /__/     \__\ `)
-	fmt.Println(`                                              `)
-	fmt.Println(`==============================================`)
-	fmt.Println(`                                              `)
-
+	color.Cyan(`  ___  _  _______  _`)
+	color.Cyan(` / _ \| |/ /_   _|/ \`)
+	color.Cyan(`| | | | ' /  | | / _ \`)
+	color.Cyan(`| |_| | . \  | |/ ___ \`)
+	color.Cyan(` \___/|_|\_\ |_/_/   \_\`)
+	fmt.Println("")
+	var versionInfo string = color.CyanString("Okta ") + "version " + color.YellowString("0.0.1-beta")
+	fmt.Println(versionInfo)
+	fmt.Println("")
 	cmd.Execute()
 }

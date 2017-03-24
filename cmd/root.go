@@ -20,6 +20,7 @@ import (
 
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
+	"github.com/fatih/color"
 )
 
 var cfgFile string
@@ -27,8 +28,6 @@ var cfgFile string
 // RootCmd represents the base command when called without any subcommands
 var RootCmd = &cobra.Command{
 	Use:   "okta",
-	Short: "Okta Short Description",
-	Long: `Okta Long Description`,
 }
 
 // Execute adds all child commands to the root command sets flags appropriately.
@@ -43,14 +42,35 @@ func Execute() {
 func init() {
 	cobra.OnInitialize(initConfig)
 
-	// Here you will define your flags and configuration settings.
-	// Cobra supports Persistent Flags, which, if defined here,
-	// will be global for your application.
+	var usageTemplate string = usageTemplate()
+	RootCmd.SetUsageTemplate(usageTemplate)
+}
 
-	//RootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.okta-cli.yaml)")
-	// Cobra also supports local flags, which will only run
-	// when this action is called directly.
-	//RootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+func usageTemplate() string {
+	return ``+color.YellowString("Usage:")+`{{if .Runnable}}
+  {{if .HasAvailableFlags}}{{appendIfNotPresent .UseLine "[flags]"}}{{else}}{{.UseLine}}{{end}}{{end}}{{if .HasAvailableSubCommands}}
+  {{ .CommandPath}} [command]{{end}}{{if gt .Aliases 0}}
+
+`+color.YellowString("Aliases:")+`
+  {{.NameAndAliases}}
+{{end}}{{if .HasExample}}
+
+`+color.YellowString("Examples:")+`
+{{ .Example }}{{end}}{{if .HasAvailableSubCommands}}
+
+`+color.YellowString("Available Commands:")+`{{range .Commands}}{{if (or .IsAvailableCommand (eq .Name "help"))}}
+  `+color.GreenString("{{rpad .Name .NamePadding }}")+` {{.Short}}{{end}}{{end}}{{end}}{{if .HasAvailableLocalFlags}}
+
+`+color.YellowString("Flags:")+`
+{{.LocalFlags.FlagUsages | trimRightSpace}}{{end}}{{if .HasAvailableInheritedFlags}}
+
+`+color.YellowString("Global Flags:")+`
+{{.InheritedFlags.FlagUsages | trimRightSpace}}{{end}}{{if .HasHelpSubCommands}}
+
+`+color.YellowString("Additional help topics:")+`{{range .Commands}}{{if .IsAdditionalHelpTopicCommand}}
+  {{rpad .CommandPath .CommandPathPadding}} {{.Short}}{{end}}{{end}}{{end}}{{if .HasAvailableSubCommands}}
+{{end}}
+`
 }
 
 // initConfig reads in config file and ENV variables if set.
