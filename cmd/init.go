@@ -137,7 +137,7 @@ func askForApiKey() string {
 func askForOrganization() string {
 	var response string
 
-	fmt.Print("What is your organization? (ie. dev-28957684) []:  ")
+	fmt.Print("What is your organization? (i.e. dev-28957684) []:  ")
 
 	_, err := fmt.Scanln(&response)
 	if err != nil {
@@ -151,7 +151,7 @@ func askForOrganization() string {
 func askForDomain() string {
 	var response string
 
-	fmt.Print("What domain do you use for Okta? [oktapreview.com]:  ")
+	fmt.Print("What is your Okta domain? [oktapreview.com]:  ")
 
 	fmt.Scanln(&response)
 
