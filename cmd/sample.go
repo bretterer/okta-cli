@@ -349,9 +349,38 @@ func appsForUserID(user_id string) []string {
 	return found
 }
 
+func setupCORS() {
+	fmt.Println("Setting up CORS")
+
+	path := "/api/v1/org/security/origins"
+
+	payload := `{"name": "Okta CLI CORS", "origin": "http://localhost:3000", "scopes": [{"type": "CORS"}, {"type": "REDIRECT"}]}`
+	
+	payloadReader := strings.NewReader(payload)
+
+	url := base_url + path
+	client := &http.Client {}
+	req, _ := http.NewRequest("POST", url, payloadReader)
+	req.Header.Add("Authorization", "SSWS " + ssws)
+	req.Header.Add("Accept", "application/json")
+	req.Header.Add("Content-Type", "application/json")
+
+	resp, err := client.Do(req)
+	if err != nil {
+		panic(err.Error())
+	}
+	defer resp.Body.Close()
+
+	_, err = ioutil.ReadAll(resp.Body)
+	if err != nil {
+		panic(err.Error())
+	}
+	
+}
+
 func userSetup() {
 	// Check for user, create user if they don't exist
-	user_id := getUserID("joe.user@example.com")
+	user_id := getUserID("paul.cook@example.com")
 	// Get apps assigned to user
 	app_ids := appsForUserID(user_id)
 	// fmt.Printf("%#v\n", app_ids)
@@ -436,7 +465,8 @@ func configApp(dirname string) {
 
 func installSample(cmd *cobra.Command, args []string) {
 	readConfig()
-	createUser("paul.cook@example.com")
+	setupCORS()
+	// createUser("paul.cook@example.com")
 	userSetup()
 	downloadAndUnzip()
 	configApp("samples-python-flask-2017.13-begin")
